@@ -9,6 +9,9 @@ const routes: Array<RouteRecordRaw> = [
     path: '/home',
     name: 'Home',
     component: () => import('../views/home/index.vue'),
+    meta: {
+      isNav: true,
+    },
   },
   {
     path: '/login',
