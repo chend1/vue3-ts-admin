@@ -9,14 +9,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/mockjs": "^1.0.7",
     "@types/node": "^18.7.18",
+    "@types/nprogress": "^0.2.0",
     "axios": "^0.27.2",
     "element-plus": "^2.2.17",
+    "fast-glob": "^3.2.12",
     "less": "^4.1.3",
     "less-loader": "^11.0.0",
     "mockjs": "^1.1.0",
     "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
     "pinia": "^2.0.22",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue": "^3.2.37",
     "vue-router": "4"
   },

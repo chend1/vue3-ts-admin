@@ -1,49 +1,23 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { Sidebar, Navbar } from './components'
+// 控制菜单栏收起和展开
 const isCollapse = ref(false)
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+function menuClick() {
+  isCollapse.value = !isCollapse.value
 }
 </script>
 
 <template>
   <div class="layout">
     <div class="nav">
-      <el-menu
-        default-active="2"
-        class="el-menu-vertical-demo"
-        :collapse="isCollapse"
-        @open="handleOpen"
-        @close="handleClose"
-      >
-        <el-sub-menu index="1">
-          <template #title>
-            <svg
-              class="icon"
-              aria-hidden="true"
-              font-size="17px"
-            >
-            <use xlink:href="#xueshengxinxi" />
-          </svg>
-            <span>一级菜单</span>
-          </template>
-          <el-menu-item-group>
-            <template #title><span>二级菜单</span></template>
-            <el-menu-item index="1-1">菜单一</el-menu-item>
-            <el-menu-item index="1-2">菜单二</el-menu-item>
-          </el-menu-item-group>
-        </el-sub-menu>
-        <el-menu-item index="2">
-          <el-icon><icon-menu /></el-icon>
-          <template #title>一级菜单2</template>
-        </el-menu-item>
-      </el-menu>
+      <Sidebar :isCollapse="isCollapse"></Sidebar>
     </div>
     <div class="content">
-      <RouterView></RouterView>
+      <Navbar @menuClick="menuClick" :isCollapse="isCollapse"></Navbar>
+      <div class="main-cnt">
+        <RouterView></RouterView>
+      </div>
     </div>
   </div>
 </template>
@@ -56,12 +30,18 @@ const handleClose = (key: string, keyPath: string[]) => {
   display: flex;
   justify-content: space-between;
   overflow: hidden;
-  // .nav {
-  //   // width: 260px;
-  // }
+  .nav {
+    border-right: 1px solid #dcdfe6;
+  }
   .content {
     flex: 1;
-    background-color: pink;
+    .main-cnt {
+      width: 100%;
+      height: calc(100% - 40px);
+      box-sizing: border-box;
+      padding: 10px;
+      // background-color: pink;
+    }
   }
 }
 </style>

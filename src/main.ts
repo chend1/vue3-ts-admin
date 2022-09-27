@@ -13,10 +13,16 @@ import 'element-plus/dist/index.css'
 //引入基本样式
 import 'normalize.css/normalize.css'
 import '@/assets/css/base.css'
-
-// vue实例
+// svg引入
+import svgIcon from '@/assets/svg/index.vue'
+import 'virtual:svg-icons-register'
+// if (process.env.NODE_ENV === 'development') {
+  
+// }
+import './mock/index'
 import App from './App.vue'
 const app = createApp(App)
+app.component('svg-icon', svgIcon)
 app.use(pinia)
 app.use(router)
 app.use(ElementPlus)

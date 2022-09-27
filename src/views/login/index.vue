@@ -3,6 +3,7 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { mainStore } from '@/store'
+import { login } from '@/api/login'
 const router = useRouter()
 const store = mainStore()
 const userInfo = reactive({
@@ -18,8 +19,11 @@ function loginClick() {
     })
     return
   }
-  store.setToken(userInfo.account + '-' + userInfo.password)
-  router.push('/home')
+  login(userInfo).then( res => {
+    store.setToken(res.token)
+    store.setUserInfo(res.userInfo)
+    router.push('/home')
+  })
 }
 </script>
 

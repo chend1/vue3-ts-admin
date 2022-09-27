@@ -4,7 +4,7 @@ import { getStorage } from '@/utils/index'
 class Request {
   // axios 实例
   instance: AxiosInstance;
-  // baseConfig: AxiosRequestConfig = { baseURL: "/api", timeout: 60000 };
+  // baseConfig: AxiosRequestConfig = { baseURL: import.meta.env.VITE_APP_BASE_API, timeout: 60000 };
   constructor(config: AxiosRequestConfig) {
     // 使用axios.create创建axios实例
     this.instance = axios.create(config);
