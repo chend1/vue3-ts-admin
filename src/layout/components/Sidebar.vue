@@ -21,6 +21,12 @@
           <span>首页</span>
         </template>
       </el-menu-item>
+      <el-menu-item index="/table">
+        <el-icon><svg-icon name="home"></svg-icon></el-icon>
+        <template #title>
+          <span>Table表格</span>
+        </template>
+      </el-menu-item>
       <el-sub-menu index="/error">
         <template #title>
           <el-icon><svg-icon name="error"></svg-icon></el-icon>

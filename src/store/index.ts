@@ -4,12 +4,13 @@ import type { userInfoType } from '@/api/login/type'
 import router from '@/router'
 export const mainStore = defineStore('main', {
   state: () => {
+    const userInfo: userInfoType = getStorage('userInfo', 'object') || {
+      name: '',
+      avatar: ''
+    }
     return {
       token: getStorage('token') || '',
-      userInfo: {
-        name: '',
-        avatar: ''
-      }
+      userInfo: userInfo
     }
   },
   actions: {

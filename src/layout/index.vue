@@ -35,6 +35,7 @@ function menuClick() {
   }
   .content {
     flex: 1;
+    overflow: hidden;
     .main-cnt {
       width: 100%;
       height: calc(100% - 40px);
