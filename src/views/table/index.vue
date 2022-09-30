@@ -109,7 +109,6 @@ onMounted(() => {
   <div class="main">
     <div class="head">
       <div class="search">
-        <div class="title">table表格</div>
         <div class="cnt">
           <div class="input">
             <el-input v-model="keyword" placeholder="请输入用户名/账号" />

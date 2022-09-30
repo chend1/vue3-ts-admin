@@ -16,7 +16,7 @@ import '@/assets/css/base.css'
 import svgIcon from '@/assets/svg/index.vue'
 import 'virtual:svg-icons-register'
 // mock拦截请求
-import { mockXHR } from './mock/index'
+import { mockXHR } from '../mock/index'
 import.meta.env.VITE_APP_NODE_ENV === 'development' ? mockXHR() : ''
 // 加载进度样式 nprogress样式
 import 'nprogress/nprogress.css'
