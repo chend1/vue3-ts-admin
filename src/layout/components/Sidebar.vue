@@ -38,6 +38,17 @@
           <el-menu-item index="/error/404">404</el-menu-item>
         </el-menu-item-group>
       </el-sub-menu>
+      <el-sub-menu index="/power">
+        <template #title>
+          <el-icon><svg-icon name="power"></svg-icon></el-icon>
+          <span>权限页面</span>
+        </template>
+        <el-menu-item-group>
+          <!-- <template #title><span>二级菜单</span></template> -->
+          <el-menu-item index="/power/one">权限页面1</el-menu-item>
+          <el-menu-item index="/power/two">权限页面2</el-menu-item>
+        </el-menu-item-group>
+      </el-sub-menu>
       <el-menu-item index="/about">
         <el-icon><svg-icon name="about"></svg-icon></el-icon>
         <template #title>

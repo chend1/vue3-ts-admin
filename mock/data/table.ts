@@ -6,7 +6,6 @@ interface paramsType {
   method: string
   query: any
 }
-const Random = Mock.Random
 const data = Mock.mock({
   'list|50-100': [
     {

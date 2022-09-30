@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { getStorage, setStorage, removeStorage } from '@/utils/index'
-import type { userInfoType } from '@/api/login/type'
+import type { userInfoType,menuType } from '@/api/login/type'
 import router from '@/router'
 export const mainStore = defineStore('main', {
   state: () => {
@@ -8,9 +8,11 @@ export const mainStore = defineStore('main', {
       name: '',
       avatar: ''
     }
+    const menu: menuType[] = []
     return {
       token: getStorage('token') || '',
-      userInfo: userInfo
+      userInfo: userInfo,
+      menu
     }
   },
   actions: {
@@ -21,6 +23,9 @@ export const mainStore = defineStore('main', {
     setUserInfo(userInfo: userInfoType){
       this.userInfo = userInfo
       setStorage('userInfo', userInfo)
+    },
+    setMenu(menu: menuType[]){
+      this.menu = menu
     },
     logOut() {
       this.token = ''

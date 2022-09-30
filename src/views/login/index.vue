@@ -3,14 +3,14 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { mainStore } from '@/store'
-import { login } from '@/api/login'
+import { login, getInfo } from '@/api/login'
 const router = useRouter()
 const store = mainStore()
 const userInfo = reactive({
   account: '',
   password: '',
 })
-function loginClick() {
+async function loginClick () {
   console.log(userInfo)
   if (!userInfo.account || !userInfo.password) {
     ElMessage({
@@ -19,11 +19,14 @@ function loginClick() {
     })
     return
   }
-  login(userInfo).then( res => {
-    store.setToken(res.token)
-    store.setUserInfo(res.userInfo)
-    router.push('/home')
-  })
+  const res = await login(userInfo)
+  store.setToken(res.token)
+  const result = await getInfo({token: res.token})
+  store.setUserInfo(result.userInfo)
+  store.setMenu(result.menu)
+  console.log(result.menu);
+  
+  router.push('/home')
 }
 </script>
 

@@ -7,7 +7,17 @@ export interface userInfoType {
   avatar: string
 }
 
-export interface  loginResultType<T>{
-  token: string,
-  userInfo: T
+export interface  loginResultType{
+  token: string
+}
+export interface menuType{
+  id: number,
+  path: string,
+  title: string,
+  icon: string,
+  children: menuType[] | []
+}
+export interface infoType<T,F>{
+  userInfo: T,
+  menu: F[]
 }

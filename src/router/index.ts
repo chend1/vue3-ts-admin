@@ -1,7 +1,61 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { getStorage } from '@/utils/index'
 import NProgress from 'nprogress'
-const routes: Array<RouteRecordRaw> = [
+
+export const asyncRoutes = [
+  {
+    path: '/about',
+    name: 'About',
+    component: () => import('../views/about/index.vue'),
+    meta: {
+      isNav: true,
+      icon: 'about',
+      title: '关于我们',
+    },
+  },
+  {
+    path: '/table',
+    name: 'Table',
+    component: () => import('../views/table/index.vue'),
+    meta: {
+      isNav: true,
+      icon: 'table',
+      title: 'Table表格',
+    },
+  },
+  {
+    path: '/power',
+    name: 'Power',
+    component: () => import('../views/power/index.vue'),
+    meta: {
+      isNav: true,
+      icon: 'power',
+      title: '权限页面',
+    },
+    children: [
+      {
+        path: 'one',
+        name: 'PowerOne',
+        component: () => import('../views/power/one/index.vue'),
+        meta: {
+          title: '权限页面1',
+          icon: '',
+        },
+      },
+      {
+        path: 'two',
+        name: 'PowerTwo',
+        component: () => import('../views/power/two/index.vue'),
+        meta: {
+          title: '权限页面2',
+          icon: '',
+        },
+      },
+    ],
+  },
+]
+// 常用路由
+export const constantRoutes = [
   {
     path: '/',
     redirect: '/home',
@@ -26,26 +80,6 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/about/index.vue'),
-    meta: {
-      isNav: true,
-      icon: 'about',
-      title: '关于我们',
-    },
-  },
-  {
-    path: '/table',
-    name: 'Table',
-    component: () => import('../views/table/index.vue'),
-    meta: {
-      isNav: true,
-      icon: 'table',
-      title: 'Table表格',
-    },
-  },
-  {
     path: '/error/401',
     name: 'Error401',
     component: () => import('../views/401/index.vue'),
@@ -65,8 +99,9 @@ const routes: Array<RouteRecordRaw> = [
       title: '404',
     },
   },
-  { path: '/\*', redirect: '/error/404' }
+  { path: '/*', redirect: '/error/404' },
 ]
+const routes: Array<RouteRecordRaw> = [...constantRoutes]
 
 const router = createRouter({
   history: createWebHistory(), //process.env.BASE_URL
@@ -86,6 +121,17 @@ router.beforeEach((to, from, next) => {
   }
   next()
 })
+// 重置路由
+export const resetRouter = () => {
+  const asyncRoutesName = asyncRoutes.map((item) => {
+    return item.name
+  })
+  asyncRoutesName.forEach((name) => {
+    if (router.hasRoute(name)) {
+      router.removeRoute(name)
+    }
+  })
+}
 router.afterEach(() => {
   NProgress.done()
 })
