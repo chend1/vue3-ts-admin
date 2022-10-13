@@ -15,7 +15,8 @@ export interface menuType{
   path: string,
   title: string,
   icon: string,
-  children: menuType[] | []
+  children: menuType[] | [],
+  isHidden: boolean,
 }
 export interface infoType<T,F>{
   userInfo: T,

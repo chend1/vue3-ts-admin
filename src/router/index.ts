@@ -34,7 +34,7 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: 'one',
+        path: '/power/one',
         name: 'PowerOne',
         component: () => import('../views/power/one/index.vue'),
         meta: {
@@ -43,7 +43,7 @@ export const asyncRoutes = [
         },
       },
       {
-        path: 'two',
+        path: '/power/two',
         name: 'PowerTwo',
         component: () => import('../views/power/two/index.vue'),
         meta: {

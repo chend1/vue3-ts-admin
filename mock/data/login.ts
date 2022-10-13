@@ -28,6 +28,7 @@ const menu1 = [
     title: '关于我们',
     icon: 'about',
     children: [],
+    isHidden: false,
   },
   {
     id: 102,
@@ -35,6 +36,7 @@ const menu1 = [
     title: 'Table表格',
     icon: 'table',
     children: [],
+    isHidden: false,
   },
 ]
 const menu2 = [
@@ -43,6 +45,7 @@ const menu2 = [
     path: '/about',
     title: '关于我们',
     icon: 'about',
+    isHidden: false,
     children: [],
   },
   {
@@ -51,26 +54,30 @@ const menu2 = [
     title: 'Table表格',
     icon: 'table',
     children: [],
+    isHidden: false,
   },
   {
     id: 103,
     path: '/power',
     title: '权限页面',
     icon: 'power',
+    isHidden: false,
     children: [
       {
         id: 104,
-        path: '/power',
+        path: '/power/one',
         title: '权限页面1',
         icon: '',
         children: [],
+        isHidden: false,
       },
       {
         id: 105,
-        path: '/power',
+        path: '/power/two',
         title: '权限页面2',
         icon: '',
         children: [],
+        isHidden: false,
       },
     ],
   },

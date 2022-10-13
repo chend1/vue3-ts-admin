@@ -24,7 +24,7 @@ async function loginClick () {
   const result = await getInfo({token: res.token})
   store.setUserInfo(result.userInfo)
   store.setMenu(result.menu)
-  console.log(result.menu);
+  console.log(store.getRouterList);
   
   router.push('/home')
 }
