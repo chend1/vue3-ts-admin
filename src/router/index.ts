@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { getStorage } from '@/utils/index'
 import NProgress from 'nprogress'
-
+import { mainStore } from '@/store'
 export const asyncRoutes = [
   {
     path: '/about',
@@ -104,19 +104,31 @@ export const constantRoutes = [
 const routes: Array<RouteRecordRaw> = [...constantRoutes]
 
 const router = createRouter({
-  history: createWebHistory(), //process.env.BASE_URL
+  history: createWebHistory(), //createWebHashHistory
   routes,
 })
 // 路由守卫
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+  console.log(1111);
   const token = getStorage('token')
   NProgress.start()
+  const store = mainStore()
+  const menu = store.routerList
   if (to.path === '/login' && token) {
     next('/')
     return
   }
   if (to.path !== '/login' && !token) {
     next('/login')
+    return
+  }
+  if(to.path !== '/login' && token){
+    if(menu && menu.length){
+      next()
+    }else{
+      await store.setUserInfo()
+      next()
+    }
     return
   }
   next()

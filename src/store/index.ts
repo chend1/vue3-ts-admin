@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { getStorage, setStorage, removeStorage } from '@/utils/index'
 import type { userInfoType, menuType } from '@/api/login/type'
+import { getInfo } from '@/api/login'
 import { generateRoutes } from './permission'
 import router from '@/router'
 interface routeType {
@@ -34,15 +35,21 @@ export const mainStore = defineStore('main', {
       setStorage('token', token)
       this.token = token
     },
-    setUserInfo(userInfo: userInfoType) {
-      this.userInfo = userInfo
-      setStorage('userInfo', userInfo)
+    async setUserInfo() {
+      const result = await getInfo({token: this.token})
+      this.userInfo = result.userInfo
+      setStorage('userInfo', result.userInfo)
+      this.setMenu(result.menu)
+      console.log(33);
+      
+      return true
     },
     setMenu(menu: menuType[]) {
       this.menu = menu
       this.routerList = generateRoutes(menu)
-      console.log(this.routerList);
-      
+      this.routerList.forEach((route: any) => {
+        router.addRoute(route)
+      })
     },
     logOut() {
       this.token = ''

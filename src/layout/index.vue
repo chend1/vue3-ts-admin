@@ -1,11 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { Sidebar, Navbar } from './components'
+import { mainStore } from '@/store'
 // 控制菜单栏收起和展开
 const isCollapse = ref(false)
 function menuClick() {
   isCollapse.value = !isCollapse.value
 }
+const store = mainStore()
+onMounted(() => {
+  store.setUserInfo()
+})
 </script>
 
 <template>
