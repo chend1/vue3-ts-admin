@@ -9,8 +9,8 @@ const login = {
   type: 'post',
   response: (config: paramsType) => {
     let token = Random.string(30, 40)
-    if (config.body.account.indexOf('power') !== -1) {
-      token += 'power'
+    if (config.body.account.indexOf('admin') !== -1) {
+      token += 'admin'
     }
     return {
       result: true,
@@ -22,6 +22,14 @@ const login = {
   },
 }
 const menu1 = [
+  {
+    id: 100,
+    path: '/home',
+    title: '首页',
+    icon: 'home',
+    isHidden: false,
+    children: [],
+  },
   {
     id: 101,
     path: '/about',
@@ -40,6 +48,14 @@ const menu1 = [
   },
 ]
 const menu2 = [
+  {
+    id: 100,
+    path: '/home',
+    title: '首页',
+    icon: 'home',
+    isHidden: false,
+    children: [],
+  },
   {
     id: 101,
     path: '/about',
@@ -96,7 +112,7 @@ const getUserInfo = {
           name: Random.cname(),
           avatar: Random.image('100x100'),
         },
-        menu: token.indexOf('power') === -1 ? menu1 : menu2,
+        menu: token.indexOf('admin') === -1 ? menu1 : menu2,
       },
     }
   },

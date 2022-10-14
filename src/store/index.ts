@@ -40,8 +40,6 @@ export const mainStore = defineStore('main', {
       this.userInfo = result.userInfo
       setStorage('userInfo', result.userInfo)
       this.setMenu(result.menu)
-      console.log(33);
-      
       return true
     },
     setMenu(menu: menuType[]) {
@@ -50,6 +48,8 @@ export const mainStore = defineStore('main', {
       this.routerList.forEach((route: any) => {
         router.addRoute(route)
       })
+      // 必须最后加上404跳转路由，不然刷新会直接跳转404
+      router.addRoute({ path: '/:pathMatch(.*)', redirect: '/error/404' })
     },
     logOut() {
       this.token = ''

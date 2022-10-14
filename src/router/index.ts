@@ -4,6 +4,16 @@ import NProgress from 'nprogress'
 import { mainStore } from '@/store'
 export const asyncRoutes = [
   {
+    path: '/home',
+    name: 'Home',
+    component: () => import('../views/home/index.vue'),
+    meta: {
+      isNav: true,
+      icon: 'home',
+      title: '首页',
+    },
+  },
+  {
     path: '/about',
     name: 'About',
     component: () => import('../views/about/index.vue'),
@@ -61,16 +71,6 @@ export const constantRoutes = [
     redirect: '/home',
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: () => import('../views/home/index.vue'),
-    meta: {
-      isNav: true,
-      icon: 'home',
-      title: '首页',
-    },
-  },
-  {
     path: '/login',
     name: 'Login',
     component: () => import('../views/login/index.vue'),
@@ -84,7 +84,6 @@ export const constantRoutes = [
     name: 'Error401',
     component: () => import('../views/401/index.vue'),
     meta: {
-      isNav: true,
       icon: 'error',
       title: '401',
     },
@@ -94,22 +93,19 @@ export const constantRoutes = [
     name: 'Error404',
     component: () => import('../views/404/index.vue'),
     meta: {
-      isNav: true,
       icon: 'error',
       title: '404',
     },
-  },
-  { path: '/*', redirect: '/error/404' },
+  }
 ]
 const routes: Array<RouteRecordRaw> = [...constantRoutes]
 
 const router = createRouter({
-  history: createWebHistory(), //createWebHashHistory
+  history: createWebHistory(), //createWebHashHistory,createWebHistory
   routes,
 })
 // 路由守卫
 router.beforeEach(async (to, from, next) => {
-  console.log(1111);
   const token = getStorage('token')
   NProgress.start()
   const store = mainStore()
@@ -122,12 +118,13 @@ router.beforeEach(async (to, from, next) => {
     next('/login')
     return
   }
-  if(to.path !== '/login' && token){
-    if(menu && menu.length){
+  if (to.path !== '/login' && token) {
+    if (menu && menu.length) {
       next()
-    }else{
+    } else {
       await store.setUserInfo()
-      next()
+      // 第一次进入页面，addRoute刚添加路由未生效，需要重进一次
+      next({ ...to, replace: true })
     }
     return
   }
