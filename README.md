@@ -3,16 +3,16 @@ Vue 3 + TypeScript + Vite +  Vue-Router + pinia + Element-Plus + Echarts + Axios
 项目中使用mockjs模拟需要的后端接口请求，可脱离后端自主开发测试，实现了路由权限控制功能，可在此项目基础上直接进行二次开发
 # 目录结构描述
 ```
-│  .gitignore				    git配置文件
+│  .gitignore			git配置文件
 |  index.html           项目html模板文件
 │  package.json         项目相关依赖
-│  README.md				    项目说明
+│  README.md			项目说明
 |  tsconfig.json        TS配置文件
 |  tsconfig.node.json   TS配置文件
 │  vite.config.ts 	    vite配置文件
 │  yarn.lock            项目相关依赖具体版本
 │
-├─.vscode					      vscode配置文件
+├─.vscode				vscode配置文件
 │      extensions.json
 │
 ├─node_modules          项目依赖包
@@ -78,9 +78,11 @@ Vue 3 + TypeScript + Vite +  Vue-Router + pinia + Element-Plus + Echarts + Axios
         |  ··· 
 ```
 # 项目启动
-yarn
-yarn dev --host
+```js
+yarn  //安装依赖
+yarn dev --host  //启动
+```
 
 
-#描述
+# 描述
 个人开发维护! 遇到问题或项目不足欢迎提出！
