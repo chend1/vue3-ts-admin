@@ -65,7 +65,7 @@ const routes: Array<RouteRecordRaw> = [
       title: '404',
     },
   },
-  { path: '/\*', redirect: '/error/404' }
+  { path: '/:pathMatch(.*)', redirect: '/error/404' }
 ]
 
 const router = createRouter({
