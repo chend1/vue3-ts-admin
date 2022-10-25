@@ -46,6 +46,14 @@ const menu1 = [
     children: [],
     isHidden: false,
   },
+  {
+    id: 103,
+    path: '/richText',
+    title: '富文本编辑',
+    icon: 'rich',
+    children: [],
+    isHidden: false,
+  },
 ]
 const menu2 = [
   {
@@ -96,6 +104,14 @@ const menu2 = [
         isHidden: false,
       },
     ],
+  },
+  {
+    id: 103,
+    path: '/richText',
+    title: '富文本编辑',
+    icon: 'rich',
+    children: [],
+    isHidden: false,
   },
 ]
 const getUserInfo = {

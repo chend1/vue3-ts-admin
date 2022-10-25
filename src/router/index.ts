@@ -63,6 +63,16 @@ export const asyncRoutes = [
       },
     ],
   },
+  {
+    path: '/richText',
+    name: 'RichText',
+    component: () => import('../views/richText/index.vue'),
+    meta: {
+      isNav: true,
+      icon: 'rich',
+      title: '富文本编辑',
+    },
+  },
 ]
 // 常用路由
 export const constantRoutes = [
