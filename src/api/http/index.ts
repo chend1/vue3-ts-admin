@@ -1,6 +1,7 @@
 import axios from "axios";
 import type {AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import { getStorage } from '@/utils/index'
+import { ElMessage } from "element-plus";
 class Request {
   // axios 实例
   instance: AxiosInstance;
@@ -35,6 +36,10 @@ class Request {
           return data
         } else {
           // 错误提醒
+          ElMessage({
+            type: 'error',
+            message
+          })
           return Promise.reject(res)
         }
       },

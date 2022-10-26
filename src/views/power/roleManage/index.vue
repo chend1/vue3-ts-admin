@@ -2,7 +2,7 @@
 
 <template>
   <div class="main">
-    权限页面1
+    权限页面2
   </div>
 </template>
 
