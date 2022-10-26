@@ -4,19 +4,15 @@ export interface paramsType{
   keyword?: string
 }
 
-export interface userListType<T>{
+export interface roleListType<T>{
   count: number,
   list: T[],
 }
 
-export interface userType{
+export interface roleType{
   id?: number,
   name: string,
-  sex: number,
-  account: string,
-  password: string,
-  create_time: string,
   status: number,
-  role: number,
-  avatar?: string
+  menuList: number[],
+  create_time: string,
 }

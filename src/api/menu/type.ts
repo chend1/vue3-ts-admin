@@ -4,19 +4,16 @@ export interface paramsType{
   keyword?: string
 }
 
-export interface userListType<T>{
+export interface menuListType<T>{
   count: number,
   list: T[],
 }
 
-export interface userType{
-  id?: number,
-  name: string,
-  sex: number,
-  account: string,
-  password: string,
-  create_time: string,
-  status: number,
-  role: number,
-  avatar?: string
+export interface menuType{
+  id: number,
+  path: string,
+  title: string,
+  icon: string,
+  children: menuType[] | [],
+  isHidden: boolean,
 }

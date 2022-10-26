@@ -1,18 +1,18 @@
 import request from '../request'
-import type { userListType, userType, paramsType } from './type'
-// 获取用户列表数据
-export function getUserList(params: paramsType) {
-  return request.get<userListType<userType>>('/user/list', { params })
+import type { roleListType, roleType, paramsType } from './type'
+// 获取角色列表数据
+export function getRoleList(params: paramsType) {
+  return request.get<roleListType<roleType>>('/role/list', { params })
 }
-// 修改用户数据
-export function editUser(data: userType) {
-  return request.post('/user/edit', data)
+// 修改角色数据
+export function editRole(data: roleType) {
+  return request.post('/role/edit', data)
 }
-// 新增用户数据
-export function addUser(data: userType) {
-  return request.post('/user/add', data)
+// 新增角色数据
+export function addRole(data: roleType) {
+  return request.post('/role/add', data)
 }
-// 删除用户数据
-export function deleteUser(data: { id: number }) {
-  return request.post('/user/delete', data)
+// 删除角色数据
+export function deleteRole(data: { id: number }) {
+  return request.post('/role/delete', data)
 }

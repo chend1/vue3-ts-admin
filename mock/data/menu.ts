@@ -1,4 +1,11 @@
-import { getStorage } from '../../src/utils/storage'
+import { getStorage, setStorage } from '@/utils/storage'
+import { timestampChange } from '@/utils'
+import type { menuType } from '@/api/menu/type'
+interface paramsType {
+  body: any
+  method: string
+  query: any
+}
 // 菜单列表
 export const menuList = getStorage('menuList', 'object') || [
   {
@@ -65,7 +72,7 @@ export const menuList = getStorage('menuList', 'object') || [
     icon: 'rich',
     children: [],
     isHidden: false,
-  }
+  },
 ]
 const getMenuList = {
   url: '/menu/list',
@@ -80,5 +87,82 @@ const getMenuList = {
     }
   },
 }
-
-export default [getMenuList]
+const editMenu = {
+  url: '/menu/edit',
+  type: 'post',
+  response: (config: paramsType) => {
+    const { id } = config.body
+    const index = menuList.findIndex((item: menuType) => {
+      return item.id === id
+    })
+    if (index >= 0) {
+      menuList[index] = config.body
+      setStorage('menuList', menuList)
+      return {
+        result: true,
+        code: 200,
+        data: {
+          message: '编辑成功',
+        },
+      }
+    } else {
+      return {
+        result: false,
+        code: 400,
+        data: {
+          message: '编辑错误',
+        },
+      }
+    }
+  },
+}
+const addMenu = {
+  url: '/menu/add',
+  type: 'post',
+  response: (config: paramsType) => {
+    const times = new Date()
+    const menu = Object.assign(config.body, {
+      id: menuList[menuList.length - 1].id + 1,
+      create_time: timestampChange(times),
+    })
+    menuList.unshift(menu)
+    setStorage('menuList', menuList)
+    return {
+      result: true,
+      code: 200,
+      data: {
+        message: '新增成功',
+      },
+    }
+  },
+}
+const deleteMenu = {
+  url: '/menu/delete',
+  type: 'post',
+  response: (config: paramsType) => {
+    const { id } = config.body
+    const index = menuList.findIndex((item: menuType) => {
+      return item.id === id
+    })
+    if (index >= 0) {
+      menuList.splice(index, 1)
+      setStorage('menuList', menuList)
+      return {
+        result: true,
+        code: 200,
+        data: {
+          message: '删除成功',
+        },
+      }
+    } else {
+      return {
+        result: false,
+        code: 400,
+        data: {
+          message: '删除错误',
+        },
+      }
+    }
+  },
+}
+export default [getMenuList, editMenu, addMenu, deleteMenu]

@@ -1,18 +1,18 @@
 import request from '../request'
-import type { userListType, userType, paramsType } from './type'
-// 获取用户列表数据
-export function getUserList(params: paramsType) {
-  return request.get<userListType<userType>>('/user/list', { params })
+import type { menuListType, menuType, paramsType } from './type'
+// 获取菜单列表数据
+export function getRoleList(params: paramsType) {
+  return request.get<menuListType<menuType>>('/role/list', { params })
 }
-// 修改用户数据
-export function editUser(data: userType) {
-  return request.post('/user/edit', data)
+// 修改菜单数据
+export function editRole(data: menuType) {
+  return request.post('/role/edit', data)
 }
-// 新增用户数据
-export function addUser(data: userType) {
-  return request.post('/user/add', data)
+// 新增菜单数据
+export function addRole(data: menuType) {
+  return request.post('/role/add', data)
 }
-// 删除用户数据
-export function deleteUser(data: { id: number }) {
-  return request.post('/user/delete', data)
+// 删除菜单数据
+export function deleteRole(data: { id: number }) {
+  return request.post('/role/delete', data)
 }
