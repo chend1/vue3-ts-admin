@@ -82,7 +82,7 @@ const getMenuList = {
       result: true,
       code: 200,
       data: {
-        menuList,
+        list: menuList,
       },
     }
   },

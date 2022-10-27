@@ -10,7 +10,7 @@ interface paramsType {
 export const userList = getStorage('userList', 'object') || [
   {
     id: 1,
-    name: '管理员',
+    name: 'admin',
     sex: 1,
     account: 'admin',
     password: '123456',
@@ -20,7 +20,7 @@ export const userList = getStorage('userList', 'object') || [
   },
   {
     id: 2,
-    name: '普通用户',
+    name: 'user',
     sex: 1,
     account: 'user',
     password: '123456',

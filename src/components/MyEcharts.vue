@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as echarts from 'echarts'
-import { onMounted } from 'vue'
+import { onBeforeUnmount, onMounted } from 'vue'
 type EChartsOption = echarts.EChartsOption
 const props = defineProps<{
   option: EChartsOption | any
@@ -18,6 +18,9 @@ function initChart() {
 }
 onMounted(() => {
   initChart()
+})
+onBeforeUnmount(() => {
+  window.onresize = null
 })
 </script>
 

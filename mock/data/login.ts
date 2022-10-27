@@ -15,6 +15,14 @@ const login = {
       return config.body.account === user.account
     })
     let token = JSON.stringify(user[0])
+    if(user.length <= 0){
+      return {
+        result: false,
+        code: 400,
+        data: {},
+        message: '账号或密码错误，请重新登录！',
+      }
+    }
     if (
       config.body.account === user[0].account &&
       config.body.password === user[0].password
