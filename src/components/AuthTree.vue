@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import type { menuType } from '@/api/menu/type'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 const emit = defineEmits(['closeTree','confirmAuth'])
 const props = defineProps<{
   menuList: number[]
   menuAllList: menuType[]
 }>()
-
+const isStrictly = ref(true)
+onMounted(() => {
+  isStrictly.value = false
+})
 const treeProps = {
   label: 'title',
   children: 'children',
@@ -40,6 +43,7 @@ function confirmAuth(){
         :default-expand-all="true"
         :default-checked-keys="menuList"
         node-key="id"
+        :check-strictly="isStrictly"
         show-checkbox
         @check-change="handleCheckChange"
       />
