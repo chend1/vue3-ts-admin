@@ -1,5 +1,5 @@
 import { getStorage, setStorage } from '@/utils/storage'
-import { timestampChange } from '@/utils'
+// import { timestampChange } from '@/utils'
 import type { menuType } from '@/api/menu/type'
 interface paramsType {
   body: any
@@ -7,7 +7,7 @@ interface paramsType {
   query: any
 }
 // 菜单列表
-export const menuList = getStorage('menuList', 'object') || [
+export let menuList = getStorage('menuList', 'object') || [
   {
     id: 100,
     path: '/home',
@@ -15,6 +15,7 @@ export const menuList = getStorage('menuList', 'object') || [
     icon: 'home',
     isHidden: false,
     children: [],
+    parentId: 0,
   },
   {
     id: 101,
@@ -23,6 +24,7 @@ export const menuList = getStorage('menuList', 'object') || [
     icon: 'about',
     isHidden: false,
     children: [],
+    parentId: 0,
   },
   {
     id: 102,
@@ -31,6 +33,7 @@ export const menuList = getStorage('menuList', 'object') || [
     icon: 'table',
     children: [],
     isHidden: false,
+    parentId: 0,
   },
   {
     id: 103,
@@ -38,6 +41,7 @@ export const menuList = getStorage('menuList', 'object') || [
     title: '权限管理',
     icon: 'power',
     isHidden: false,
+    parentId: 0,
     children: [
       {
         id: 104,
@@ -46,6 +50,7 @@ export const menuList = getStorage('menuList', 'object') || [
         icon: '',
         children: [],
         isHidden: false,
+        parentId: 103,
       },
       {
         id: 105,
@@ -54,6 +59,7 @@ export const menuList = getStorage('menuList', 'object') || [
         icon: '',
         children: [],
         isHidden: false,
+        parentId: 103,
       },
       {
         id: 106,
@@ -62,6 +68,7 @@ export const menuList = getStorage('menuList', 'object') || [
         icon: '',
         children: [],
         isHidden: false,
+        parentId: 103,
       },
     ],
   },
@@ -72,6 +79,7 @@ export const menuList = getStorage('menuList', 'object') || [
     icon: 'rich',
     children: [],
     isHidden: false,
+    parentId: 0,
   },
 ]
 const getMenuList = {
@@ -91,13 +99,11 @@ const editMenu = {
   url: '/menu/edit',
   type: 'post',
   response: (config: paramsType) => {
-    const { id } = config.body
-    const index = menuList.findIndex((item: menuType) => {
-      return item.id === id
-    })
-    if (index >= 0) {
-      menuList[index] = config.body
-      setStorage('menuList', menuList)
+    const newList = deleteMenuList(menuList, config.body)
+    const newMenuList = addMenuList(newList, config.body)
+    if (newMenuList.length > 0) {
+      setStorage('menuList', newMenuList)
+      menuList = newMenuList
       return {
         result: true,
         code: 200,
@@ -112,6 +118,7 @@ const editMenu = {
         data: {
           message: '编辑错误',
         },
+        message: '编辑错误',
       }
     }
   },
@@ -120,19 +127,41 @@ const addMenu = {
   url: '/menu/add',
   type: 'post',
   response: (config: paramsType) => {
-    const times = new Date()
     const menu = Object.assign(config.body, {
-      id: menuList[menuList.length - 1].id + 1,
-      create_time: timestampChange(times),
+      id: Date.now(),
     })
-    menuList.unshift(menu)
-    setStorage('menuList', menuList)
-    return {
-      result: true,
-      code: 200,
-      data: {
-        message: '新增成功',
-      },
+    if (config.body.parentId === 0) {
+      menuList.unshift(menu)
+      setStorage('menuList', menuList)
+      return {
+        result: true,
+        code: 200,
+        data: {
+          message: '新增成功',
+        },
+      }
+    } else {
+      const newMenuList = addMenuList(menuList, config.body)
+      if (newMenuList.length > 0) {
+        setStorage('menuList', newMenuList)
+        menuList = newMenuList
+        return {
+          result: true,
+          code: 200,
+          data: {
+            message: '新增成功',
+          },
+        }
+      } else {
+        return {
+          result: false,
+          code: 400,
+          data: {
+            message: '新增错误',
+          },
+          message: '新增错误',
+        }
+      }
     }
   },
 }
@@ -140,13 +169,10 @@ const deleteMenu = {
   url: '/menu/delete',
   type: 'post',
   response: (config: paramsType) => {
-    const { id } = config.body
-    const index = menuList.findIndex((item: menuType) => {
-      return item.id === id
-    })
-    if (index >= 0) {
-      menuList.splice(index, 1)
-      setStorage('menuList', menuList)
+    const newMenuList = deleteMenuList(menuList, config.body)
+    if (newMenuList.length > 0) {
+      setStorage('menuList', newMenuList)
+      menuList = newMenuList
       return {
         result: true,
         code: 200,
@@ -161,8 +187,59 @@ const deleteMenu = {
         data: {
           message: '删除错误',
         },
+        message: '删除错误',
       }
     }
   },
 }
 export default [getMenuList, editMenu, addMenu, deleteMenu]
+
+// 编辑菜单
+function getMenu(menuList: menuType[], menu: menuType) {
+  let menus: menuType[] = []
+  menuList.forEach((item) => {
+    let newMenu = Object.assign({}, item)
+    if (item.id === menu.id) {
+      newMenu = menu
+    } else {
+      if (item.children && item.children.length) {
+        newMenu.children = getMenu(item.children, menu)
+      }
+    }
+    menus.push(newMenu)
+  })
+  return menus
+}
+// 添加菜单
+function addMenuList(menuList: menuType[], menu: menuType) {
+  let menus: menuType[] = []
+  menuList.forEach((item) => {
+    let newMenu: menuType = Object.assign({}, item)
+    if (item.id === menu.parentId) {
+      menu.id = Date.now()
+      ;(newMenu.children as menuType[]).push(menu)
+    } else {
+      if (item.children && item.children.length) {
+        newMenu.children = addMenuList(item.children, menu)
+      }
+    }
+    menus.push(newMenu)
+  })
+  return menus
+}
+// 删除菜单
+function deleteMenuList(menuList: menuType[], menu: menuType) {
+  let menus: menuType[] = []
+  menuList.forEach((item) => {
+    let newMenu = Object.assign({}, item)
+    if (item.id === menu.id) {
+      newMenu = menu
+    } else {
+      if (item.children && item.children.length) {
+        newMenu.children = deleteMenuList(item.children, menu)
+      }
+      menus.push(newMenu)
+    }
+  })
+  return menus
+}

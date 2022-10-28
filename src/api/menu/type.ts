@@ -10,10 +10,11 @@ export interface menuListType<T>{
 }
 
 export interface menuType{
-  id: number,
+  id?: number,
   path: string,
   title: string,
   icon: string,
   children: menuType[] | [],
   isHidden: boolean,
+  parentId: number
 }

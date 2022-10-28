@@ -15,7 +15,7 @@ const login = {
       return config.body.account === user.account
     })
     let token = JSON.stringify(user[0])
-    if(user.length <= 0){
+    if (user.length <= 0) {
       return {
         result: false,
         code: 400,
@@ -59,7 +59,7 @@ const getUserInfo = {
   response: (config: paramsType) => {
     const { token } = config.body
     const userInfo = JSON.parse(token)
-    const role: any = roleList.filter( (role: any) => {
+    const role: any = roleList.filter((role: any) => {
       return role.id === userInfo.role
     })
     const ids = role[0].menuList
@@ -79,14 +79,14 @@ const getUserInfo = {
 
 export default [login, getUserInfo]
 
-function getMyMenuList(ids: number[], menuList: any){
-  let menus :any = []
-  menuList.forEach( (item: any) => {
-    if(ids.indexOf(item.id) !== -1){
+function getMyMenuList(ids: number[], menuList: any) {
+  let menus: any = []
+  menuList.forEach((item: any) => {
+    if (ids.indexOf(item.id) !== -1) {
       const menu = Object.assign({}, item)
       menus.push(menu)
       menu.children = []
-      if(item.children && item.children.length){
+      if (item.children && item.children.length) {
         menu.children = getMyMenuList(ids, item.children)
       }
     }

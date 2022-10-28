@@ -1,6 +1,6 @@
 import axios from "axios";
 import type {AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { getStorage } from '@/utils/index'
+import { getStorage } from '@/utils/storage'
 import { ElMessage } from "element-plus";
 class Request {
   // axios 实例

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { menuType } from '@/api/menu/type'
 import { ref } from 'vue'
-const emit = defineEmits(['closeTree'])
+const emit = defineEmits(['closeTree','confirmAuth'])
 const props = defineProps<{
   menuList: number[]
   menuAllList: menuType[]
 }>()
-console.log(123456, props.menuAllList, props.menuList)
+
 const treeProps = {
   label: 'title',
   children: 'children',
@@ -15,22 +15,29 @@ function closeTree() {
   emit('closeTree')
 }
 const treeRef = ref()
-function handleCheckChange(val: any, type: any, checkList: any) {
-  console.log(val,type,checkList)
-  console.log(123,treeRef.value?.getCheckedNodes());
-  
+const selectIds = ref<number[]>([])
+selectIds.value = props.menuList
+function handleCheckChange() {
+  const list = treeRef.value?.getCheckedNodes(false, true)
+  selectIds.value = list && list.map( (item:any) => {
+    return item.id
+  })
+}
+// 确认授权
+function confirmAuth(){
+  emit('confirmAuth', selectIds.value)
 }
 </script>
 
 <template>
   <div class="tree">
+    <!-- :check-strictly="true" -->
     <div class="warp">
       <el-tree
         ref="treeRef"
         :props="treeProps"
         :data="menuAllList"
         :default-expand-all="true"
-        :check-strictly="true"
         :default-checked-keys="menuList"
         node-key="id"
         show-checkbox
@@ -39,7 +46,7 @@ function handleCheckChange(val: any, type: any, checkList: any) {
     </div>
     <div class="tool">
       <el-button type="primary" plain @click="closeTree"> 取消 </el-button>
-      <el-button type="primary"> 确认 </el-button>
+      <el-button type="primary" @click="confirmAuth"> 确认 </el-button>
     </div>
   </div>
   <div class="mask" @click="closeTree"></div>
@@ -56,13 +63,13 @@ function handleCheckChange(val: any, type: any, checkList: any) {
   width: 600px;
   height: 700px;
   border-radius: 5px;
-  .warp{
+  .warp {
     box-sizing: border-box;
     padding: 20px 30px;
     height: calc(100% - 60px);
     overflow-y: auto;
   }
-  .tool{
+  .tool {
     position: absolute;
     left: 0;
     bottom: 0;

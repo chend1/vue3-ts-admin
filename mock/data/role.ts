@@ -68,6 +68,7 @@ const editRole = {
         data: {
           message: '编辑错误',
         },
+        message: '编辑错误'
       }
     }
   },

@@ -94,14 +94,26 @@ function confirmClick() {
   }
   isShowDialog.value = false
 }
-// 授权
+// 编辑授权
 const menuList = ref<number[]>([])
 const menuAllList = ref<menuType[]>([])
 const isAuth = ref<boolean>(false)
 function rloeAuthClick(role: roleType){
   isAuth.value = true
-  console.log(role);
+  roleInfo.value = role
   menuList.value = role.menuList
+}
+// 确认授权
+function confirmAuth(ids: number[]){
+  roleInfo.value.menuList = ids
+  editRole(roleInfo.value).then((res) => {
+    getRoleLists()
+    ElMessage({
+      message: res.message,
+      type: 'success',
+    })
+    isAuth.value = false
+  })
 }
 onMounted(async () => {
   const res = await getMenuList()
@@ -215,7 +227,7 @@ onMounted(async () => {
       </span>
     </template>
   </el-dialog>
-  <AuthTreeVue v-if="isAuth" @closeTree="isAuth = false" :menuList="menuList" :menuAllList="menuAllList"></AuthTreeVue>
+  <AuthTreeVue v-if="isAuth" @confirmAuth="confirmAuth" @closeTree="isAuth = false" :menuList="menuList" :menuAllList="menuAllList"></AuthTreeVue>
 </template>
 
 <style lang="less" scoped>

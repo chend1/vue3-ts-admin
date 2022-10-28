@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import { getStorage } from '@/utils/index'
+import { getStorage } from '@/utils/storage'
 import NProgress from 'nprogress'
 import { mainStore } from '@/store'
 export const asyncRoutes = [
