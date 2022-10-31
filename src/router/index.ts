@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import { getStorage } from '@/utils/index'
+import { getStorage } from '@/utils/storage'
 import NProgress from 'nprogress'
 import { mainStore } from '@/store'
 export const asyncRoutes = [
@@ -40,24 +40,33 @@ export const asyncRoutes = [
     meta: {
       isNav: true,
       icon: 'power',
-      title: '权限页面',
+      title: '权限管理',
     },
     children: [
       {
-        path: '/power/one',
-        name: 'PowerOne',
-        component: () => import('../views/power/one/index.vue'),
+        path: '/power/userManage',
+        name: 'UserManage',
+        component: () => import('../views/power/userManage/index.vue'),
         meta: {
-          title: '权限页面1',
+          title: '用户管理',
           icon: '',
         },
       },
       {
-        path: '/power/two',
-        name: 'PowerTwo',
-        component: () => import('../views/power/two/index.vue'),
+        path: '/power/menuManage',
+        name: 'MenuManage',
+        component: () => import('../views/power/menuManage/index.vue'),
         meta: {
-          title: '权限页面2',
+          title: '菜单管理',
+          icon: '',
+        },
+      },
+      {
+        path: '/power/roleManage',
+        name: 'RoleManage',
+        component: () => import('../views/power/roleManage/index.vue'),
+        meta: {
+          title: '角色管理',
           icon: '',
         },
       },

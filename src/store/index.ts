@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getStorage, setStorage, removeStorage } from '@/utils/index'
+import { getStorage, setStorage, removeStorage } from '@/utils/storage'
 import type { userInfoType, menuType } from '@/api/login/type'
 import { getInfo } from '@/api/login'
 import { generateRoutes } from './permission'

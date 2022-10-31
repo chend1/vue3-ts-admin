@@ -1,24 +1,4 @@
-export function getStorage(key: string, type: string = 'string') {
-  const str = sessionStorage.getItem(key)
-  if (type === 'string') {
-    return str
-  } else {
-    return str ? JSON.parse(str) : str
-  }
-}
-
-export function setStorage(key: string, value: string | Object) {
-  if (typeof value === 'string') {
-    sessionStorage.setItem(key, value)
-  } else {
-    sessionStorage.setItem(key, JSON.stringify(value))
-  }
-}
-
-export function removeStorage(key: string) {
-  sessionStorage.removeItem(key)
-}
-
+// 获取参数
 export function param2Obj(url: string) {
   const search = decodeURIComponent(url.split('?')[1]).replace(/\+/g, ' ')
   if (!search) {
@@ -102,4 +82,13 @@ export function timestampChange(timestamp: any, format?: string): string {
   // 周
   dateStr = dateStr.replace(/W|w|week/, week)
   return dateStr
+}
+// 扁平数组函数
+export function flatArray(newArray: any, oldArray: any){
+  oldArray.forEach( (item: any) => {
+    newArray.push(item)
+    if(item.children && item.children.length){
+      flatArray(newArray, item.children)
+    }
+  })
 }

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { mainStore } from '@/store'
 import { computed } from '@vue/reactivity'
+import { useRouter } from 'vue-router'
 const store = mainStore()
 defineProps({
   isCollapse: Boolean,
@@ -15,6 +16,10 @@ const userInfo = computed(() => store.userInfo)
 function logOutClick() {
   store.logOut()
 }
+const router = useRouter()
+function routerClick(url: string) {
+  router.push(url)
+}
 </script>
 
 <template>
@@ -24,7 +29,7 @@ function logOutClick() {
         <svg-icon name="openMenu" v-if="isCollapse"></svg-icon>
         <svg-icon name="closeMenu" v-else></svg-icon>
       </div>
-      <span class="title">{{$route.meta.title}}</span>
+      <span class="title">{{ $route.meta.title }}</span>
     </div>
     <div class="right-menu">
       <el-dropdown>
@@ -32,12 +37,29 @@ function logOutClick() {
           <div class="img">
             <img :src="userInfo.avatar" alt="" />
           </div>
-          <div class="name">{{userInfo.name}}</div>
+          <div class="name">{{ userInfo.name }}</div>
         </div>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>Github</el-dropdown-item>
-            <el-dropdown-item>关于我们</el-dropdown-item>
+            <el-dropdown-item
+              ><a
+                class="text"
+                href="https://github.com/chend1/vue3-ts-admin"
+                target="_blank"
+                >Github</a
+              ></el-dropdown-item
+            >
+            <el-dropdown-item
+              ><a
+                class="text"
+                href="https://github.com/chend1/vue3-ts-admin"
+                target="_blank"
+                >Gitee</a
+              ></el-dropdown-item
+            >
+            <el-dropdown-item @click="routerClick('/about')"
+              >关于我们</el-dropdown-item
+            >
             <el-dropdown-item @click="logOutClick">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -60,38 +82,43 @@ function logOutClick() {
     font-size: 24px;
     display: flex;
     align-items: center;
-    .menu{
+    .menu {
       display: flex;
       align-items: center;
       cursor: pointer;
     }
-    .title{
+    .title {
       margin-left: 15px;
       font-size: 18px;
       font-weight: normal;
     }
   }
-  .right-menu{
+  .right-menu {
     margin-top: 2.5px;
     min-width: 35px;
     height: 35px;
     margin-right: 15px;
-    .user-info{
+
+    .user-info {
       display: flex;
       align-items: center;
       cursor: pointer;
-      .img{
+      .img {
         width: 30px;
         height: 30px;
         border-radius: 50%;
         overflow: hidden;
         margin-right: 5px;
-        img{
+        img {
           width: 100%;
           border-radius: 50%;
         }
       }
     }
   }
+}
+.text {
+  color: #606266;
+  text-decoration: none;
 }
 </style>
