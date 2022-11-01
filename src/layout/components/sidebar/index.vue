@@ -20,6 +20,8 @@ console.log(routeList.value)
     :collapse="isCollapse"
     :router="true"
     @select="menuSelect"
+    background-color="#304156"
+    text-color="#fff"
   >
     <template v-for="item in routeList" :key="item.path">
       <SidebarItem :route="item"></SidebarItem>

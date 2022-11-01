@@ -1,6 +1,6 @@
 # vue3-ts-admin 项目简介
-Vue 3 + TypeScript + Vite +  Vue-Router + pinia + Element-Plus + Echarts + Axios 后台管理框架
-项目中使用mockjs模拟需要的后端接口请求，可脱离后端自主开发测试，实现了路由权限控制功能，可在此项目基础上直接进行二次开发
+Vue 3 + TypeScript + Vite +  Vue-Router + pinia + Element-Plus + Axios 后台管理框架;
+项目中使用mockjs模拟需要的后端接口请求，实现了路由权限控制功能，可在此项目基础上直接进行二次开发
 # 目录结构描述
 ```
 │  .gitignore			git配置文件
@@ -40,7 +40,7 @@ Vue 3 + TypeScript + Vite +  Vue-Router + pinia + Element-Plus + Echarts + Axios
     │  |-images
     │  |-svg        
     │  |   |-icons     svg 图片
-    │  |   index.vue   
+    │  └─ index.vue   
     │
     ├─components			公共组件目录
     │
@@ -54,7 +54,7 @@ Vue 3 + TypeScript + Vite +  Vue-Router + pinia + Element-Plus + Echarts + Axios
     │      index.ts
     │
     ├─store 				存储库目录
-    │  │  index.js
+    │    └─index.js
     │
     │
     ├─utils					公共方法
@@ -70,6 +70,13 @@ Vue 3 + TypeScript + Vite +  Vue-Router + pinia + Element-Plus + Echarts + Axios
         │  home
         |    index.vue    
         │  login
+        |    |
+        |    |- menuManage   菜单管理
+        |    |       └─ index.vue
+        |    |- roleManage   权限管理
+        |    |       └─ index.vue
+        |    └─ userManage   用户管理
+        |            └─ index.vue
         |    index.vue    
         │  power
         |    index.vue    
@@ -77,6 +84,13 @@ Vue 3 + TypeScript + Vite +  Vue-Router + pinia + Element-Plus + Echarts + Axios
         |    index.vue    
         |  ··· 
 ```
+# 项目预览
+:![](/src/assets/images/show/show0.png)
+:![](/src/assets/images/show/show1.png)
+:![](/src/assets/images/show/show2.png)
+:![](/src/assets/images/show/show3.png)
+:![](/src/assets/images/show/show4.png)
+:![](/src/assets/images/show/show5.png)
 # 项目启动
 ```js
 yarn  //安装依赖
