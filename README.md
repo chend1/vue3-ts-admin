@@ -1,6 +1,10 @@
 # vue3-ts-admin 项目简介
 Vue 3 + TypeScript + Vite +  Vue-Router + pinia + Element-Plus + Echarts + Axios 后台管理框架
 项目中使用mockjs模拟需要的后端接口请求，实现了路由权限控制,富文本编辑等功能
+*** master主分支 包含富文本编辑等功能
+*** auth-template分支 仅添加了路由权限控制
+*** base-template分支 基本后台框架，无权限控制
+
 # 目录结构描述
 ```
 │  .gitignore			git配置文件
