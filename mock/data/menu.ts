@@ -72,15 +72,6 @@ export let menuList = getStorage('menuList', 'object') || [
       },
     ],
   },
-  {
-    id: 107,
-    path: '/richText',
-    title: '富文本编辑',
-    icon: 'rich',
-    children: [],
-    isHidden: false,
-    parentId: 0,
-  },
 ]
 const getMenuList = {
   url: '/menu/list',
@@ -100,6 +91,24 @@ const editMenu = {
   type: 'post',
   response: (config: paramsType) => {
     const newList = deleteMenuList(menuList, config.body)
+    if (config.body.parentId === 0) {
+      const menu = Object.assign(
+        {
+          id: Date.now(),
+        },
+        config.body
+      )
+      newList.unshift(menu)
+      setStorage('menuList', newList)
+      menuList = newList
+      return {
+        result: true,
+        code: 200,
+        data: {
+          message: '编辑成功',
+        },
+      }
+    }
     const newMenuList = addMenuList(newList, config.body)
     if (newMenuList.length > 0) {
       setStorage('menuList', newMenuList)
@@ -127,9 +136,12 @@ const addMenu = {
   url: '/menu/add',
   type: 'post',
   response: (config: paramsType) => {
-    const menu = Object.assign(config.body, {
-      id: Date.now(),
-    })
+    const menu = Object.assign(
+      {
+        id: Date.now(),
+      },
+      config.body
+    )
     if (config.body.parentId === 0) {
       menuList.unshift(menu)
       setStorage('menuList', menuList)
@@ -216,7 +228,9 @@ function addMenuList(menuList: menuType[], menu: menuType) {
   menuList.forEach((item) => {
     let newMenu: menuType = Object.assign({}, item)
     if (item.id === menu.parentId) {
-      menu.id = Date.now()
+      if(!menu.id){
+        menu.id = Date.now()
+      }
       ;(newMenu.children as menuType[]).push(menu)
     } else {
       if (item.children && item.children.length) {

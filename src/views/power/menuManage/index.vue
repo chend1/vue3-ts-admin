@@ -58,6 +58,7 @@ function confirmClick() {
       getMenuLists()
     })
   } else {
+    delete menuInfo.value.id
     addMenu(menuInfo.value).then((res) => {
       ElMessage({
         message: res.message,
