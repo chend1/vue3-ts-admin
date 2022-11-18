@@ -11,11 +11,14 @@ const store = mainStore()
 onMounted(() => {
   store.setUserInfo()
 })
+// 获取用户信息
+// const userInfo = computed(() => store.userInfo)
 </script>
 
 <template>
   <div class="layout">
-    <div class="nav">
+    <div class="nav-warp">
+      <!-- {{userInfo.name}} -->
       <Sidebar :isCollapse="isCollapse"></Sidebar>
     </div>
     <div class="content">
@@ -35,8 +38,9 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   overflow: hidden;
-  .nav {
+  .nav-warp {
     border-right: 1px solid #dcdfe6;
+    background-color: #304156
   }
   .content {
     flex: 1;

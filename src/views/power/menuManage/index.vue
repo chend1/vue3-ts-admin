@@ -2,9 +2,8 @@
 import { getMenuList, editMenu, addMenu, deleteMenu } from '@/api/menu'
 import { Plus } from '@element-plus/icons-vue'
 import type { menuType } from '@/api/menu/type'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { computed } from '@vue/reactivity'
 import { flatArray } from '@/utils'
 const menuList = ref<menuType[]>([])
 // 获取菜单列表
@@ -87,8 +86,8 @@ function deleteMenuClick(menu: menuType) {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning',
-  }).then( () => {
-    deleteMenu({id: menu.id as number}).then((res) => {
+  }).then(() => {
+    deleteMenu({ id: menu.id as number }).then((res) => {
       ElMessage({
         message: res.message,
         type: 'success',
@@ -117,9 +116,16 @@ function deleteMenuClick(menu: menuType) {
       default-expand-all
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
     >
-      <el-table-column prop="title" label="路由名称" />
-      <el-table-column prop="path" label="前端路径" />
-      <el-table-column prop="icon" label="图标" />
+      <el-table-column prop="title" label="路由名称" align="center" />
+      <el-table-column prop="path" label="前端路径" align="center" />
+      <!-- <el-table-column prop="icon" label="图标" /> -->
+      <el-table-column prop="icon" label="图标" align="center">
+        <template #default="scope">
+          <span style="font-size: 18px;">
+            <svg-icon :name="scope.row.icon"></svg-icon>
+          </span>
+        </template>
+      </el-table-column>
       <el-table-column prop="isHidden" label="状态" width="80" align="center">
         <template #default="scope">
           {{ scope.row.isHidden ? '隐藏' : '显示' }}
@@ -171,7 +177,38 @@ function deleteMenuClick(menu: menuType) {
           <el-input v-model="menuInfo.path" />
         </el-form-item>
         <el-form-item label="菜单图标">
-          <el-input v-model="menuInfo.icon" />
+          <!-- <el-input v-model="menuInfo.icon" /> -->
+          <div class="icon">
+            <el-radio-group v-model="menuInfo.icon" class="ml-4">
+              <el-radio label="about" size="large">
+                <svg-icon name="about"></svg-icon>
+              </el-radio>
+              <el-radio label="error" size="large">
+                <svg-icon name="error"></svg-icon>
+              </el-radio>
+              <el-radio label="home" size="large">
+                <svg-icon name="home"></svg-icon>
+              </el-radio>
+              <el-radio label="menu" size="large">
+                <svg-icon name="menu"></svg-icon>
+              </el-radio>
+              <el-radio label="table" size="large">
+                <svg-icon name="table"></svg-icon>
+              </el-radio>
+              <el-radio label="openMenu" size="large">
+                <svg-icon name="openMenu"></svg-icon>
+              </el-radio>
+              <el-radio label="rich" size="large">
+                <svg-icon name="rich"></svg-icon>
+              </el-radio>
+              <el-radio label="power" size="large">
+                <svg-icon name="power"></svg-icon>
+              </el-radio>
+              <el-radio label="closeMenu" size="large">
+                <svg-icon name="closeMenu"></svg-icon>
+              </el-radio>
+            </el-radio-group>
+          </div>
         </el-form-item>
         <el-form-item label="状态">
           <el-radio-group v-model="menuInfo.isHidden">
@@ -215,5 +252,10 @@ function deleteMenuClick(menu: menuType) {
       }
     }
   }
+}
+.icon{
+  border: 1px solid #eee;
+  padding: 0 10px;
+  
 }
 </style>

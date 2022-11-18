@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { mainStore } from '@/store'
-import { computed } from '@vue/reactivity'
+import { computed } from 'vue'
 import SidebarItem from './SidebarItem.vue'
 const store = mainStore()
 defineProps({
