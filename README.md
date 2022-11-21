@@ -7,95 +7,30 @@ master主分支 包含富文本编辑等功能
 auth-template分支 仅添加了路由权限控制
 *** 
 base-template分支 基本后台框架，无权限控制
+```js
+// 登录账号
+admin 
+123456
+```
+# 项目预览
+:![](/src/assets/images/%E9%A6%96%E9%A1%B5.png)
+:![](/src/assets/images/%E8%A1%A8%E5%8D%95.png)
+:![](/src/assets/images/%E6%9D%83%E9%99%90.png)
+:![](/src/assets/images/%E6%9D%83%E9%99%901.png)
+:![](/src/assets/images/%E6%9D%83%E9%99%902.png)
+:![](/src/assets/images/%E6%9D%83%E9%99%903.png)
+:![](/src/assets/images/%E6%9D%83%E9%99%904.png)
+:![](/src/assets/images/%E5%AF%8C%E6%96%87%E6%9C%AC.png)
 
-# 目录结构描述
-```
-│  .gitignore			git配置文件
-|  index.html           项目html模板文件
-│  package.json         项目相关依赖
-│  README.md			项目说明
-|  tsconfig.json        TS配置文件
-|  tsconfig.node.json   TS配置文件
-│  vite.config.ts 	    vite配置文件
-│  yarn.lock            项目相关依赖具体版本
-│
-├─.vscode				vscode配置文件
-│      extensions.json
-│
-├─node_modules          项目依赖包
-├─mock                  mock服务配置文件,接口请求模拟数据
-├─public
-│      vite.svg
-│
-└─src
-    │  App.vue
-    │  main.ts
-    │  vite-env.d.ts
-    │
-    ├─api					api管理模块
-    │  │ request.ts			请求入口文件
-    │  │-http			      
-    |  |    index.ts      axios封装文件
-    │  │-login
-    |  |    index.ts      请求接口
-    |  |    type.ts       接口请求类型
-    │  └─···
-    │
-    ├─assets				静态文件
-    │  |
-    │  |-css
-    │  |-images
-    │  |-svg        
-    │  |   |-icons     svg 图片
-    │  |   index.vue   
-    │
-    ├─components			公共组件目录
-    │
-    ├─hooks
-    │
-    ├─layout				项目结构布局
-    │      components  私有组件
-    │      indx.vue
-    │
-    ├─router 				router目录
-    │      index.ts
-    │
-    ├─store 				存储库目录
-    │  │  index.js
-    │
-    │
-    ├─utils					公共方法
-    │      index.ts
-    │
-    └─views         页面
-        │  401
-        |    index.vue    
-        │  404
-        |    index.vue    
-        │  about
-        |    index.vue    
-        │  home
-        |    index.vue    
-        │  login
-        |    index.vue    
-        │  power
-        |    |- menuManage   菜单管理
-        |    |       └─ index.vue
-        |    |- roleManage   权限管理
-        |    |       └─ index.vue
-        |    └─ userManage   用户管理
-        |            └─ index.vue
-        |    index.vue    
-        │  table
-        |    index.vue    
-        |  ··· 
-```
+# 功能说明
+* 1.表单使用element-plus的table，pagination组件，实现了编辑，新增，删除，分页功能
+* 2.富文本编辑使用的是 tinymce， @tinymce/tinymce-vue
+* 3.路由权限控制 给用户设置角色，再给角色分配菜单权限，通过菜单权限展示对应路由页面
 # 项目启动
 ```js
 yarn  //安装依赖
 yarn dev --host  //启动
 ```
 
-
 # 描述
-个人开发维护! 遇到问题或项目不足欢迎提出！ 欢迎关注公众号：cd_web2020
+个人开发维护! 遇到问题或项目不足欢迎交流提出 535413064！
