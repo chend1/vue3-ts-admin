@@ -38,6 +38,19 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       chunkSizeWarningLimit: 1500,
+      // vue3 需要安装terser -> yarn add terser
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,  //打包时删除console
+          drop_debugger: true, //打包时删除 debugger
+          pure_funcs: ['console.log'],
+        },
+        output: {
+          // 去掉注释内容
+          comments: true,
+        },
+      },
       rollupOptions: {
         output: {
           manualChunks(id) {

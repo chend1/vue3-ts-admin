@@ -13,14 +13,14 @@ admin
 123456
 ```
 # 项目预览
-:![](/src/assets/images/%E9%A6%96%E9%A1%B5.png)
-:![](/src/assets/images/%E8%A1%A8%E5%8D%95.png)
-:![](/src/assets/images/%E6%9D%83%E9%99%90.png)
-:![](/src/assets/images/%E6%9D%83%E9%99%901.png)
-:![](/src/assets/images/%E6%9D%83%E9%99%902.png)
-:![](/src/assets/images/%E6%9D%83%E9%99%903.png)
-:![](/src/assets/images/%E6%9D%83%E9%99%904.png)
-:![](/src/assets/images/%E5%AF%8C%E6%96%87%E6%9C%AC.png)
+![](/src/assets/images/%E9%A6%96%E9%A1%B5.png)
+![](/src/assets/images/%E8%A1%A8%E5%8D%95.png)
+![](/src/assets/images/%E6%9D%83%E9%99%90.png)
+![](/src/assets/images/%E6%9D%83%E9%99%901.png)
+![](/src/assets/images/%E6%9D%83%E9%99%902.png)
+![](/src/assets/images/%E6%9D%83%E9%99%903.png)
+![](/src/assets/images/%E6%9D%83%E9%99%904.png)
+![](/src/assets/images/%E5%AF%8C%E6%96%87%E6%9C%AC.png)
 
 # 功能说明
 * 1.表单使用element-plus的table，pagination组件，实现了编辑，新增，删除，分页功能

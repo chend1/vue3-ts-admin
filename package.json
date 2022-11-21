@@ -23,6 +23,7 @@
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.22",
+    "terser": "^5.15.1",
     "tinymce": "^6.2.0",
     "vite-plugin-svg-icons": "^2.0.1",
     "vue": "^3.2.37",
